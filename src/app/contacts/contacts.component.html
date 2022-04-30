@@ -1,0 +1,15 @@
+<div class="container">
+        <form [formGroup]="form" (submit)="submit()">
+                <h1>Contacts</h1>
+                <input placeholder="Enter contact name"  type="text" maxlength="100" formControlName="contactName">
+                <button class="btn" type="submit" [disabled]="form.invalid">Add contact</button>
+        </form>
+
+        <div *ngFor="let contact of contactsService.contacts">
+                <app-contacts-item
+                        [name]="contact.name"
+                        [id]="contact.id"
+                ></app-contacts-item>
+        </div>
+
+</div>

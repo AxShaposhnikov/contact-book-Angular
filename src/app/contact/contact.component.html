@@ -1,0 +1,37 @@
+<div class="container">
+        <form [formGroup]="form" (submit)="submit()">
+                <h1>{{contact!.name}}</h1>
+                <button class="btn" type="submit" [disabled]="form.invalid">Add info</button>
+                <button class="btn" type="button" [routerLink]="['/']" >Go home</button>
+                <div class="input-items-container">
+                        <div class="input-items-element">
+                                <input placeholder="Enter field name"  type="text" maxlength="100" formControlName="fieldName">
+                        </div>
+                        <div class="input-items-element">
+                                <input placeholder="Enter field value"  type="text" maxlength="100" formControlName="fieldValue">
+                        </div>
+                </div>
+
+                <button
+                        [class]="disabledButton ? 'btn btn-stepBack-disabled' : 'btn'"
+                        [disabled]="disabledButton"
+                        (click)="takeStepBack()"
+                        type="button"
+                         >
+                        Step back
+                </button>
+        </form>
+
+        <div *ngFor="let info of contact!.contactInfo">
+                <app-contact-item
+                        [title]="info.infoTitle"
+                        [value]="info.infoValue"
+                        [id]="info.id"
+                        [contactId]="contact!.id"
+                        (setEnable)="disabledButton = $event"
+                >
+                </app-contact-item>
+        </div>
+
+
+</div>
