@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {Contact, ContactsService} from "../contacts.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Params} from "@angular/router";
@@ -13,6 +13,7 @@ export class ContactComponent implements OnInit{
   contact?: Contact
   id?: number
   disabledButton = true
+  @ViewChild('nameInput') inputRef: ElementRef | undefined
 
   constructor(
       public contactsService: ContactsService,
@@ -39,6 +40,7 @@ export class ContactComponent implements OnInit{
     )
     this.form.reset()
     this.disabledButton = false
+    this.inputRef?.nativeElement.focus()
   }
 
   takeStepBack() {

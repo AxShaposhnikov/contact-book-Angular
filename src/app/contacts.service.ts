@@ -29,8 +29,12 @@ export class ContactsService {
         index: 0,
         info: null
     }
-    contacts: Contact[] = []
+    contacts: Contact[] = JSON.parse(localStorage.getItem('contacts') || '[]')
     contactId: number = 0
+
+    updateInfo(contacts: Contact[]) {
+        localStorage.setItem('contacts', JSON.stringify(contacts))
+    }
 
     changeValuesInStepBackBuffer(flag: flagType, contactsId: number, index: number, info: Info) {
         this.stepBackBuffer.flag = flag
@@ -42,6 +46,7 @@ export class ContactsService {
     addContact(name: string): void {
         this.contactId++
         this.contacts.unshift({name: name, id: this.contactId, contactInfo: []})
+        this.updateInfo(this.contacts)
     }
 
     deleteContact(id: number): void {
@@ -49,6 +54,7 @@ export class ContactsService {
         if (this.contacts.length == 0) {
             this.contactId = 0
         }
+        this.updateInfo(this.contacts)
     }
 
     addContactInfo(infoName: string, infoValue: string, contact: Contact): void {
@@ -68,6 +74,7 @@ export class ContactsService {
                 )
             }
         }
+        this.updateInfo(this.contacts)
     }
 
     deleteContactInfo(contactId: number, infoId: number): void {
@@ -81,6 +88,7 @@ export class ContactsService {
                 }
             }
         }
+        this.updateInfo(this.contacts)
     }
 
     getById(id: number): Contact | undefined {
@@ -97,6 +105,7 @@ export class ContactsService {
         if (this.stepBackBuffer.flag == 'deleted') {
             this.getById(this.stepBackBuffer.contactId)!.contactInfo?.splice(this.stepBackBuffer.index, 0, this.stepBackBuffer.info!)
         }
+        this.updateInfo(this.contacts)
     }
 }
 
