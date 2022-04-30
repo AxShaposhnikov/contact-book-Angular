@@ -2,7 +2,7 @@
         <form [formGroup]="form" (submit)="submit()">
                 <h1>Contacts</h1>
                 <input placeholder="Enter contact name"  type="text" maxlength="100" formControlName="contactName">
-                <button class="btn" type="submit" [disabled]="form.invalid">Add contact</button>
+                <button class="custom-btn btn-main" type="submit" [disabled]="form.invalid">Add contact</button>
         </form>
 
         <div *ngFor="let contact of contactsService.contacts">
