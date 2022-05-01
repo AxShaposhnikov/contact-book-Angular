@@ -1,6 +1,6 @@
 <div class="container">
         <form [formGroup]="form" (submit)="submit()">
-                <h1>Contacts</h1>
+                <h1>Contact Book</h1>
                 <input placeholder="Enter contact name"  type="text" maxlength="100" formControlName="contactName">
                 <button class="custom-btn btn-main" type="submit" [disabled]="form.invalid">Add contact</button>
         </form>
