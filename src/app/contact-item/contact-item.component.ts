@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ContactsService} from "../contacts.service";
 
 @Component({
@@ -7,16 +7,16 @@ import {ContactsService} from "../contacts.service";
   styleUrls: ['./contact-item.component.scss']
 })
 export class ContactItemComponent {
-  @Input() title?: string
-  @Input() value?: string
-  @Input() id?: number
-  @Input() contactId?: number
+  @Input() title!: string
+  @Input() value!: string
+  @Input() id!: number
+  @Input() contactId!: number
   @Output() setEnable: EventEmitter<boolean> = new EventEmitter<boolean>()
 
   constructor(public contactsService: ContactsService) { }
 
   deleteInfo() {
-    this.contactsService.deleteContactInfo(this.contactId!, this.id!)
+    this.contactsService.deleteContactInfo(this.contactId, this.id)
     this.setEnable.emit(false)
   }
 }

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ContactsService} from "../contacts.service";
 
 @Component({
@@ -6,15 +6,12 @@ import {ContactsService} from "../contacts.service";
   templateUrl: './contacts-item.component.html',
   styleUrls: ['./contacts-item.component.scss']
 })
-export class ContactsItemComponent implements OnInit {
-  @Input() name?: string
-  @Input() id?: number
+export class ContactsItemComponent {
+  @Input() name!: string
+  @Input() id!: number
   constructor(public contactsService: ContactsService) { }
 
-  ngOnInit(): void {
-  }
-
   deleteContact() {
-    this.contactsService.deleteContact(this.id!)
+    this.contactsService.deleteContact(this.id)
   }
 }

@@ -32,7 +32,7 @@ export class ContactsService {
     contacts: Contact[] = JSON.parse(localStorage.getItem('contacts') || '[]')
     contactId: number = 0
 
-    updateInfo(contacts: Contact[]) {
+    updateLocalStorage(contacts: Contact[]) {
         localStorage.setItem('contacts', JSON.stringify(contacts))
     }
 
@@ -44,9 +44,12 @@ export class ContactsService {
     }
 
     addContact(name: string): void {
-        this.contactId++
+        do {
+          this.contactId++
+        } while (typeof this.getById(this.contactId) !== 'undefined')
+
         this.contacts.unshift({name: name, id: this.contactId, contactInfo: []})
-        this.updateInfo(this.contacts)
+        this.updateLocalStorage(this.contacts)
     }
 
     deleteContact(id: number): void {
@@ -54,7 +57,7 @@ export class ContactsService {
         if (this.contacts.length == 0) {
             this.contactId = 0
         }
-        this.updateInfo(this.contacts)
+        this.updateLocalStorage(this.contacts)
     }
 
     addContactInfo(infoName: string, infoValue: string, contact: Contact): void {
@@ -74,7 +77,7 @@ export class ContactsService {
                 )
             }
         }
-        this.updateInfo(this.contacts)
+        this.updateLocalStorage(this.contacts)
     }
 
     deleteContactInfo(contactId: number, infoId: number): void {
@@ -88,24 +91,29 @@ export class ContactsService {
                 }
             }
         }
-        this.updateInfo(this.contacts)
+        this.updateLocalStorage(this.contacts)
     }
 
-    getById(id: number): Contact | undefined {
+    getById(id: number): Contact | undefined{
         return this.contacts.find(c => c.id === id)
     }
 
+    takeInfoFromBuffer(): Info[] {
+        return this.getById(this.stepBackBuffer.contactId)!.contactInfo
+    }
 
 
     takeStepBack(): void {
-        if (this.stepBackBuffer.flag == 'added') {
-            this.getById(this.stepBackBuffer.contactId)!.contactInfo?.splice(this.stepBackBuffer.index, 1)
+        switch (this.stepBackBuffer.flag) {
+            case "added":
+                this.takeInfoFromBuffer().splice(this.stepBackBuffer.index, 1)
+                break
+            case "deleted":
+                this.takeInfoFromBuffer().splice(this.stepBackBuffer.index, 0, this.stepBackBuffer.info!)
+                break
         }
 
-        if (this.stepBackBuffer.flag == 'deleted') {
-            this.getById(this.stepBackBuffer.contactId)!.contactInfo?.splice(this.stepBackBuffer.index, 0, this.stepBackBuffer.info!)
-        }
-        this.updateInfo(this.contacts)
+        this.updateLocalStorage(this.contacts)
     }
 }
 

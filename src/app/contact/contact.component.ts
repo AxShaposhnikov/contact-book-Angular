@@ -10,10 +10,10 @@ import {ActivatedRoute, Params} from "@angular/router";
 })
 export class ContactComponent implements OnInit{
   form!: FormGroup
-  contact?: Contact
-  id?: number
+  contact: Contact | undefined
+  id: number = 0
   disabledButton = true
-  @ViewChild('nameInput') inputRef: ElementRef | undefined
+  @ViewChild('nameInput') inputRef!: ElementRef;
 
   constructor(
       public contactsService: ContactsService,
@@ -36,11 +36,11 @@ export class ContactComponent implements OnInit{
     this.contactsService.addContactInfo(
         this.form.value.fieldName,
         this.form.value.fieldValue,
-        this.contactsService.getById(this.id!)!
+        this.contactsService.getById(this.id)!
     )
     this.form.reset()
     this.disabledButton = false
-    this.inputRef?.nativeElement.focus()
+    this.inputRef.nativeElement.focus()
   }
 
   takeStepBack() {
