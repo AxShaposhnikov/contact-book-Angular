@@ -12,7 +12,7 @@ export interface Contact {
     contactInfo: Info[]
 }
 
-type flagType = 'added' | 'deleted' | null
+type flagType = 'added' | 'deleted'
 
 export interface Buffer {
     flag: flagType
@@ -24,7 +24,7 @@ export interface Buffer {
 @Injectable({providedIn: 'root'})
 export class ContactsService {
     stepBackBuffer: Buffer = {
-        flag: null,
+        flag: 'added',
         contactId: 0,
         index: 0,
         info: null
