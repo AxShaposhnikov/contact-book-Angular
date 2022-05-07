@@ -1,0 +1,7 @@
+<div class="contacts-item-container">
+        <div class="contacts-item-name"><span>{{name}}</span></div>
+        <div>
+                <button class="custom-btn btn-main" [routerLink]="['/contact', id]">Info</button>
+                <button class="custom-btn btn-delete" (click)="deleteContact()">Delete</button>
+        </div>
+</div>

@@ -1,0 +1,235 @@
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 90%;
+}
+
+h1 {
+  position: relative;
+
+  color: #4c4c4c;
+  font-size: 50px;
+  font-family: "Raleway", serif;
+}
+
+span {
+
+  color: #4c4c4c;
+  font-size: 20px;
+  font-family: "Raleway", serif;
+}
+
+input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  border-radius: 0;
+  outline: none;
+  height: 3rem;
+  width: 100%;
+  font-size: 16px;
+  margin: 0 0 8px 0;
+  padding: 0;
+  box-shadow: none;
+  box-sizing: content-box;
+  transition: box-shadow .3s,border .3s;
+}
+
+.contacts-item-container {
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+  margin:1rem 0 1rem 0;
+}
+
+.custom-btn {
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 0.4rem 1.3rem;
+  margin-right: 0.5rem;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+  7px 7px 20px 0px rgba(0,0,0,.1),
+  4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+.btn-main {
+  background-color: #89d8d3;
+  background-image: linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
+  border: none;
+  z-index: 1;
+  &:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    border-radius: 5px;
+    background-color: #4dccc6;
+    background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
+    box-shadow: -7px -7px 20px 0px #fff9,
+    -4px -4px 5px 0px #fff9,
+    7px 7px 20px 0px #0002,
+    4px 4px 5px 0px #0001;
+    transition: all 0.3s ease;
+  }
+  &:hover {
+    color: #fff;
+    &:after {
+      top: 0;
+      height: 100%;
+    }
+  }
+  &:active {
+    top: 2px;
+  }
+}
+
+.btn-minor {
+  background: rgb(255,151,0);
+  border: none;
+  z-index: 1;
+  &:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 0;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    border-radius: 5px;
+    background-color: #eaf818;
+    background-image: linear-gradient(315deg, #eaf818 0%, #f6fc9c 74%);
+    box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5);
+    transition: all 0.3s ease;
+  }
+  &:hover {
+    color: #000;
+    &:after {
+      top: auto;
+      bottom: 0;
+      height: 100%;
+    }
+  }
+  &:active {
+    top: 2px;
+  }
+}
+
+.btn-delete {
+  width: 130px;
+  height: 40px;
+  line-height: 42px;
+  padding: 0;
+  border: none;
+  background: rgb(255,27,0);
+  background: linear-gradient(0deg, rgba(255,27,0,1) 0%, rgba(251,75,2,1) 100%);
+  &:hover {
+    color: #f0094a;
+    background: transparent;
+    box-shadow: none;
+  }
+  &:after {
+    right: inherit;
+    top: inherit;
+    left: 0;
+    bottom: 0;
+  }
+}
+.btn-delete:before,
+.btn-delete:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width: 0;
+  background: #f0094a;
+  box-shadow: -1px -1px 5px 0px #fff,
+  7px 7px 20px 0px #0003,
+  4px 4px 5px 0px #0002;
+  transition: 400ms ease all;
+}
+.btn-delete:hover:before,
+.btn-delete:hover:after {
+  width: 100%;
+  transition: 800ms ease all;
+}
+
+.btn-stepBack {
+  background: #b621fe;
+  border: none;
+  z-index: 1;
+  &:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    background-color: #663dff;
+    border-radius: 5px;
+    box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+    7px 7px 20px 0px rgba(0,0,0,.1),
+    4px 4px 5px 0px rgba(0,0,0,.1);
+    transition: all 0.3s ease;
+  }
+  &:hover {
+    color: #fff;
+    &:after {
+      left: 0;
+      width: 100%;
+    }
+  }
+  &:active {
+    top: 2px;
+  }
+}
+
+.btn-stepBack-disabled {
+  background: lightgray;
+  border: none;
+  z-index: 1;
+  &:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    background-color: #663dff;
+    border-radius: 5px;
+    box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+    7px 7px 20px 0px rgba(0,0,0,.1),
+    4px 4px 5px 0px rgba(0,0,0,.1);
+    transition: all 0.3s ease;
+  }
+}
+
+.contacts-item-name {
+  margin-top: 0.5%;
+}
+
+.input-items-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-items-element {
+  width: 50%;
+  padding: 0 0.75rem;
+}
