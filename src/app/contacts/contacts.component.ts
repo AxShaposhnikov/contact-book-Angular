@@ -17,7 +17,7 @@ export class ContactsComponent implements OnInit {
     })
   }
 
-  submit() {
+  public submit(): void {
     this.contactsService.addContact(this.form.value.contactName)
     this.form.reset()
   }

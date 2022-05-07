@@ -11,7 +11,7 @@ export class ContactsItemComponent {
   @Input() id!: number
   constructor(public contactsService: ContactsService) { }
 
-  deleteContact() {
+  public deleteContact(): void {
     this.contactsService.deleteContact(this.id)
   }
 }

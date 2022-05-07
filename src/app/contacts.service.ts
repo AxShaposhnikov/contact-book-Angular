@@ -32,35 +32,35 @@ export class ContactsService {
     contacts: Contact[] = JSON.parse(localStorage.getItem('contacts') || '[]')
     contactId: number = 0
 
-    updateLocalStorage(contacts: Contact[]) {
+    private static updateLocalStorage(contacts: Contact[]): void {
         localStorage.setItem('contacts', JSON.stringify(contacts))
     }
 
-    changeValuesInStepBackBuffer(flag: flagType, contactsId: number, index: number, info: Info) {
+    private changeValuesInStepBackBuffer(flag: flagType, contactsId: number, index: number, info: Info): void {
         this.stepBackBuffer.flag = flag
         this.stepBackBuffer.contactId = contactsId
         this.stepBackBuffer.index = index
         this.stepBackBuffer.info = info
     }
 
-    addContact(name: string): void {
+    public addContact(name: string): void {
         do {
           this.contactId++
         } while (typeof this.getById(this.contactId) !== 'undefined')
 
         this.contacts.unshift({name: name, id: this.contactId, contactInfo: []})
-        this.updateLocalStorage(this.contacts)
+        ContactsService.updateLocalStorage(this.contacts)
     }
 
-    deleteContact(id: number): void {
+    public deleteContact(id: number): void {
         this.contacts = this.contacts.filter((contact) => contact.id != id)
         if (this.contacts.length == 0) {
             this.contactId = 0
         }
-        this.updateLocalStorage(this.contacts)
+        ContactsService.updateLocalStorage(this.contacts)
     }
 
-    addContactInfo(infoName: string, infoValue: string, contact: Contact): void {
+    public addContactInfo(infoName: string, infoValue: string, contact: Contact): void {
         for (let i = 0; i < this.contacts.length; i++){
             if (this.contacts[i].id == contact.id) {
                 this.contacts[i].contactInfo.push({
@@ -77,10 +77,10 @@ export class ContactsService {
                 )
             }
         }
-        this.updateLocalStorage(this.contacts)
+        ContactsService.updateLocalStorage(this.contacts)
     }
 
-    deleteContactInfo(contactId: number, infoId: number): void {
+    public deleteContactInfo(contactId: number, infoId: number): void {
         for (let i = 0; i < this.contacts.length; i++) {
             if (this.contacts[i].id == contactId) {
                 for (let j = 0; j < this.contacts[i].contactInfo.length; j++) {
@@ -91,19 +91,19 @@ export class ContactsService {
                 }
             }
         }
-        this.updateLocalStorage(this.contacts)
+        ContactsService.updateLocalStorage(this.contacts)
     }
 
-    getById(id: number): Contact | undefined{
+    public getById(id: number): Contact | undefined{
         return this.contacts.find(c => c.id === id)
     }
 
-    takeInfoFromBuffer(): Info[] {
+    private takeInfoFromBuffer(): Info[] {
         return this.getById(this.stepBackBuffer.contactId)!.contactInfo
     }
 
 
-    takeStepBack(): void {
+    public takeStepBack(): void {
         switch (this.stepBackBuffer.flag) {
             case "added":
                 this.takeInfoFromBuffer().splice(this.stepBackBuffer.index, 1)
@@ -113,7 +113,7 @@ export class ContactsService {
                 break
         }
 
-        this.updateLocalStorage(this.contacts)
+        ContactsService.updateLocalStorage(this.contacts)
     }
 }
 

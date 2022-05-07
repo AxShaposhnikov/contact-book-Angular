@@ -15,7 +15,7 @@ export class ContactItemComponent {
 
   constructor(public contactsService: ContactsService) { }
 
-  deleteInfo() {
+  public deleteInfo(): void {
     this.contactsService.deleteContactInfo(this.contactId, this.id)
     this.setEnable.emit(false)
   }

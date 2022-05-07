@@ -32,7 +32,7 @@ export class ContactComponent implements OnInit{
     })
   }
 
-  submit() {
+  public submit(): void {
     this.contactsService.addContactInfo(
         this.form.value.fieldName,
         this.form.value.fieldValue,
@@ -43,7 +43,7 @@ export class ContactComponent implements OnInit{
     this.inputRef.nativeElement.focus()
   }
 
-  takeStepBack() {
+  public takeStepBack(): void {
     this.disabledButton = true
     this.contactsService.takeStepBack()
   }

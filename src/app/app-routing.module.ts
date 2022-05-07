@@ -5,7 +5,8 @@ import {ContactComponent} from "./contact/contact.component";
 
 const routes: Routes = [
     {path:'', component: ContactsComponent},
-    {path:'contact/:id', component: ContactComponent}
+    {path:'contact/:id', component: ContactComponent},
+    {path:'**', redirectTo: ''}
 ]
 
 @NgModule({
